@@ -89,8 +89,9 @@ function save(io::IO, cube::CubeFile)
     # Atoms
     for atom in cube.system
         pos = austrip.(position(atom))
+        charge = austrip(atom[:charge])
         @printf(io, "%5d %12.6f %12.6f %12.6f %12.6f\n",
-                atomic_number(atom), atom[:charge], pos[1], pos[2], pos[3])
+                atomic_number(atom), charge, pos[1], pos[2], pos[3])
     end
 
     # Data
