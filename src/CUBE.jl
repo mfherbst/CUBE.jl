@@ -49,11 +49,12 @@ function read(filename::AbstractString)
     origin = Vec3(parse.(T, line3[2:4])) * length_unit
 
     # Next section is the list of atoms
+    charge_unit = u"e_au"
     atoms = map(lines[7:6+n_atoms]) do line
         sline = split(line)
         @assert length(sline) == 5
         Atom(parse(Int, sline[1]), parse.(T, sline[3:5]) * length_unit;
-             charge=parse(T, sline[2]))
+             charge=parse(T, sline[2]) * charge_unit)
     end
     system = isolated_system(atoms)
 
